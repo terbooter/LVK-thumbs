@@ -24,7 +24,7 @@ function serverHandler(req:IncomingMessage, res:ServerResponse) {
     var jpgFile:string = url.query.jpgFile;
     var token:string = url.query.token;
     var customParam:string = url.query.customParam;
-    
+
     if (url.pathname == '/crossdomain.xml') {
         var fileStream = fs.createReadStream('crossdomain.xml');
         fileStream.on('data', function (data) {
@@ -43,6 +43,7 @@ function serverHandler(req:IncomingMessage, res:ServerResponse) {
 
 function handleUpload(req:IncomingMessage, res:ServerResponse, jpgFile, token) {
     if (!checkToken(jpgFile, token, process.env.SECRET)) {
+        console.log("wrong_token");
         res.end("wrong_token");
         return;
     }

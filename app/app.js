@@ -36,6 +36,7 @@ function serverHandler(req, res) {
 }
 function handleUpload(req, res, jpgFile, token) {
     if (!checkToken(jpgFile, token, process.env.SECRET)) {
+        console.log("wrong_token");
         res.end("wrong_token");
         return;
     }
