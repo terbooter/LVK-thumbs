@@ -17,7 +17,16 @@ function serverHandler(req, res) {
     var jpgFile = url.query.jpgFile;
     var token = url.query.token;
     var customParam = url.query.customParam;
-    if (url.pathname == '/upload' && req.method.toLowerCase() == 'post') {
+    if (url.pathname == '/crossdomain.xml') {
+        var fileStream = fs.createReadStream('crossdomain.xml');
+        fileStream.on('data', function (data) {
+            res.write(data);
+        });
+        fileStream.on('end', function () {
+            res.end();
+        });
+    }
+    else if (url.pathname == '/upload' && req.method.toLowerCase() == 'post') {
         handleUpload(req, res, jpgFile, token);
     }
     else {
@@ -39,7 +48,6 @@ function handleUpload(req, res, jpgFile, token) {
         var subDir = makeSubpath(token);
         var newDir = '/files/' + subDir;
         var newPath = newDir + "/" + jpgFile;
-        console.log(newPath);
         fs.exists(newDir, function (exists) {
             if (!exists) {
                 console.log("Folder " + newDir + " not exist");

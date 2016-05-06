@@ -24,8 +24,16 @@ function serverHandler(req:IncomingMessage, res:ServerResponse) {
     var jpgFile:string = url.query.jpgFile;
     var token:string = url.query.token;
     var customParam:string = url.query.customParam;
-
-    if (url.pathname == '/upload' && req.method.toLowerCase() == 'post') {
+    
+    if (url.pathname == '/crossdomain.xml') {
+        var fileStream = fs.createReadStream('crossdomain.xml');
+        fileStream.on('data', function (data) {
+            res.write(data);
+        });
+        fileStream.on('end', function () {
+            res.end();
+        });
+    } else if (url.pathname == '/upload' && req.method.toLowerCase() == 'post') {
         handleUpload(req, res, jpgFile, token);
     } else {
         res.writeHead(200, {'content-type': 'text/html'});
@@ -50,7 +58,6 @@ function handleUpload(req:IncomingMessage, res:ServerResponse, jpgFile, token) {
         var subDir = makeSubpath(token);
         var newDir = '/files/' + subDir;
         var newPath = newDir + "/" + jpgFile;
-        console.log(newPath);
 
         fs.exists(newDir, (exists:boolean)=> {
             if (!exists) {
