@@ -14,6 +14,7 @@ httpServer.listen(80);
 function serverHandler(req, res) {
     console.dir(req.url);
     var url = url_module.parse(req.url, true);
+    console.dir(url);
     var jpgFile = url.query.jpgFile;
     var token = url.query.token;
     var customParam = url.query.customParam;
