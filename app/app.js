@@ -19,6 +19,7 @@ function serverHandler(req, res) {
     var token = url.query.token;
     var customParam = url.query.customParam;
     if (url.pathname == '/crossdomain.xml') {
+        res.writeHead(200, { "Content-Type": "text/xml" });
         var fileStream = fs.createReadStream('crossdomain.xml');
         fileStream.on('data', function (data) {
             res.write(data);
