@@ -1,0 +1,2 @@
+# Secret key to check token=md5(jpgFile+SECRET)
+SECRET=SECRET
