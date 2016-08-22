@@ -12,11 +12,10 @@ node:
     max-file: "100"
   env_file: .dockerenv
   restart: always
-  command: "nodemon -L /app/app.js"
 
 nginx:
   image: nginx
   volumes:
      - ./files:/usr/share/nginx/html/thumbs:ro
   ports:
-     - "83:80"
+     - "80:80"
