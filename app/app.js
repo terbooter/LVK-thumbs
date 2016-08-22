@@ -46,6 +46,9 @@ function handleUpload(req, res, jpgFile, token) {
     form.maxFields = 1;
     form.uploadDir = "/tmp_files";
     form.parse(req, function (err, fields, files) {
+        if (!file) {
+            res.end(JSON.stringify({ ok: false, error: "no_file_data" }));
+        }
         var file = files["file"];
         var tmpPath = file.path;
         var subDir = makeSubpath(token);

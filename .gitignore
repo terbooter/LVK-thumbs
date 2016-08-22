@@ -1,3 +1,4 @@
 .idea
 .dockerenv
 files/*
+docker-compose.local.yml
