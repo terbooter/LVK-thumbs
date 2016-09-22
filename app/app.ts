@@ -1,8 +1,8 @@
-/// <reference path="../typings/node/node.d.ts" />
-/// <reference path="../typings/formidable/formidable.d.ts" />
+/// <reference path="typings/node/node.d.ts" />
+/// <reference path="typings/formidable/formidable.d.ts" />
 
 import {IncomingMessage, ServerResponse} from "http";
-import {Fields, Files, File} from "formidable";
+import {Fields, Files} from "formidable";
 import {Url} from "url";
 
 var fs = require('fs');
@@ -13,15 +13,15 @@ var mkdirp = require('mkdirp');
 var url_module = require('url');
 
 //Path - full path to file with filename /var/lib/my.xml
-//Dir - full path to file without filename and withoud trailing slash /var/lib
+//Dir - full path to file without filename and without trailing slash /var/lib
 
 var httpServer = http.createServer(serverHandler);
 httpServer.listen(80);
 
 function serverHandler(req:IncomingMessage, res:ServerResponse) {
-    console.dir(req.url);
+
+    console.log(req.url);
     var url:Url = url_module.parse(req.url, true);
-    console.dir(url);
     var jpgFile:string = url.query.jpgFile;
     var token:string = url.query.token;
     var customParam:string = url.query.customParam;
@@ -46,7 +46,7 @@ function serverHandler(req:IncomingMessage, res:ServerResponse) {
 function handleUpload(req:IncomingMessage, res:ServerResponse, jpgFile, token) {
     if (!checkToken(jpgFile, token, process.env.SECRET)) {
         console.log("wrong_token");
-        res.end("wrong_token");
+        res.end(JSON.stringify({ok: false, error: "wrong_token"}));
         return;
     }
 
@@ -56,22 +56,22 @@ function handleUpload(req:IncomingMessage, res:ServerResponse, jpgFile, token) {
 
     form.parse(req, (err, fields:Fields, files:Files)=> {
 
-        if (!file) {
+        if (!files) {
             res.end(JSON.stringify({ok: false, error: "no_file_data"}));
         }
 
         var file = files["file"];
         var tmpPath = file.path;
         var subDir = makeSubpath(token);
-        var newDir = '/files/' + subDir;
+        var newDir = '/thumbs/' + subDir;
         var newPath = newDir + "/" + jpgFile;
 
         fs.exists(newDir, (exists:boolean)=> {
             if (!exists) {
-                console.log("Folder " + newDir + " not exist");
+                // console.log("Folder " + newDir + " not exist");
                 mkdirp(newDir, (err)=> {
                     if (err) {
-                        res.end("cant_create_subdir");
+                        res.end(JSON.stringify({ok: false, error: "cant_create_subdir"}));
                         console.error(err);
                     } else {
                         moveFile(tmpPath, newPath);

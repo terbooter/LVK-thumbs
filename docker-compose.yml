@@ -1,11 +1,8 @@
 node:
   build: .
-  ports:
-    - "82:80"
   volumes:
     - ./app:/app
-    - ./files:/files
-    - ./tmp_files:/tmp_files
+    - ./thumbs:/thumbs
   log_driver: "json-file"
   log_opt:
     max-size: "50m"
@@ -16,6 +13,7 @@ node:
 nginx:
   image: nginx
   volumes:
-     - ./files:/usr/share/nginx/html/thumbs:ro
-  ports:
-     - "80:80"
+     - ./thumbs:/public_html/thumbs:ro
+     - ./nginx:/etc/nginx:ro
+  links:
+     - node

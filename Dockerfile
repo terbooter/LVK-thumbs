@@ -9,6 +9,7 @@ ENV NODE_PATH=.:/usr/lib/node_modules:/node_modules
 WORKDIR /app
 ADD app/package.json /package.json
 RUN mkdir -p /node_modules
+RUN mkdir -p /tmp_files
 RUN npm install --prefix /
 
 CMD ["node", "/app/app.js"]

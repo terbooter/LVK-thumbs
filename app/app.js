@@ -1,5 +1,5 @@
-/// <reference path="../typings/node/node.d.ts" />
-/// <reference path="../typings/formidable/formidable.d.ts" />
+/// <reference path="typings/node/node.d.ts" />
+/// <reference path="typings/formidable/formidable.d.ts" />
 "use strict";
 var fs = require('fs');
 var crypto = require('crypto');
@@ -8,13 +8,12 @@ var http = require('http');
 var mkdirp = require('mkdirp');
 var url_module = require('url');
 //Path - full path to file with filename /var/lib/my.xml
-//Dir - full path to file without filename and withoud trailing slash /var/lib
+//Dir - full path to file without filename and without trailing slash /var/lib
 var httpServer = http.createServer(serverHandler);
 httpServer.listen(80);
 function serverHandler(req, res) {
-    console.dir(req.url);
+    console.log(req.url);
     var url = url_module.parse(req.url, true);
-    console.dir(url);
     var jpgFile = url.query.jpgFile;
     var token = url.query.token;
     var customParam = url.query.customParam;
@@ -39,27 +38,27 @@ function serverHandler(req, res) {
 function handleUpload(req, res, jpgFile, token) {
     if (!checkToken(jpgFile, token, process.env.SECRET)) {
         console.log("wrong_token");
-        res.end("wrong_token");
+        res.end(JSON.stringify({ ok: false, error: "wrong_token" }));
         return;
     }
     var form = new formidable.IncomingForm();
     form.maxFields = 1;
     form.uploadDir = "/tmp_files";
     form.parse(req, function (err, fields, files) {
-        if (!file) {
+        if (!files) {
             res.end(JSON.stringify({ ok: false, error: "no_file_data" }));
         }
         var file = files["file"];
         var tmpPath = file.path;
         var subDir = makeSubpath(token);
-        var newDir = '/files/' + subDir;
+        var newDir = '/thumbs/' + subDir;
         var newPath = newDir + "/" + jpgFile;
         fs.exists(newDir, function (exists) {
             if (!exists) {
-                console.log("Folder " + newDir + " not exist");
+                // console.log("Folder " + newDir + " not exist");
                 mkdirp(newDir, function (err) {
                     if (err) {
-                        res.end("cant_create_subdir");
+                        res.end(JSON.stringify({ ok: false, error: "cant_create_subdir" }));
                         console.error(err);
                     }
                     else {
