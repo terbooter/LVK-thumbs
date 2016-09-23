@@ -1,4 +1,4 @@
 .idea
 .dockerenv
 thumbs/*
-docker-compose.local.yml
+docker-compose.override.yml
