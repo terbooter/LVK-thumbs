@@ -1,5 +1,6 @@
 #Live Video Kit Thumbs
 Demo: http://terbooter.github.io/LVK-thumbs/
+
 This microservice is part of Live Video Kit (LVK).
 LVK helps stream live video in RTMP format
 LVK consists of 3 parts:
@@ -12,8 +13,8 @@ LVK consists of 3 parts:
 This microservice is used for uploading thumbnails from [LVK-client](https://github.com/terbooter/LVK-client) (publisher).
 
 LVK-thumbs consists of two parts:
-* Uploader (nodejs application)
-* Nginx
+1. Uploader (nodejs application)
+2. Nginx
 
 # Usage
 Call publisher API method from JS
