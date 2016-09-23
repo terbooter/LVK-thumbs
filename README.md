@@ -15,7 +15,7 @@ LVK-thumbs consists of two parts:
 * Uploader (nodejs application)
 * Nginx
 
-## Usage
+# Usage
 Call publisher API method from JS
 ```
 takeScreenshot(uploadURL:String,
@@ -31,6 +31,7 @@ Call getStatus() method to get thumbnail URL
 
 #How to build and start container
 * Clone this repo to `/docker-data` directory
+* Go to project dir `cd /docker-data/LVK-thumbs/`
 * Make file `.dockerenv`
 * Set `SECRET` param in `.dockerenv` file
 * Create file `docker-compose.override.yml` with following content:
@@ -44,7 +45,7 @@ and change exposed port if needed
 * Check crossdomain URL `/crossdomain.xml` (need for flash player secret policy)
 * Check `/upload` URL (have to show LVK thumbs server info)
 
-## GET params
+# GET params
 publisher.swf sends 3 GET params: 
 * `jpgFile` - имя загружаемого файла
 * `token` - md5(jpgFile + SECRET) SECRET - переменная окружения устанавливается в файле .dockerenv   
