@@ -18,7 +18,7 @@ LVK-thumbs consists of two parts:
 
 # Usage
 Call publisher API method from JS
-```
+```actionscript
 takeScreenshot(uploadURL:String,
                jpgFile:String,
                token:String,
@@ -43,7 +43,7 @@ nginx:
 ```
 and change exposed port if needed
 * `docker-compose up -d`
-* Check crossdomain URL `/crossdomain.xml` (need for flash player secret policy) [demo](http://lvk.cloudapp.net/crossdomain.xml)
+* Check crossdomain URL `/crossdomain.xml` (need for flash player security policy) [demo](http://lvk.cloudapp.net/crossdomain.xml)
 * Check `/upload` URL (have to show LVK thumbs server info) [demo](http://lvk.cloudapp.net/upload)
 
 # GET params
