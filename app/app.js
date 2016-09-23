@@ -107,4 +107,3 @@ function moveFile(oldPath, newPath) {
         });
     });
 }
-//# sourceMappingURL=app.js.map

@@ -1,5 +1,5 @@
 #Live Video Kit Thumbs
-Demo: http://terbooter.github.io/LVK-thumbs/
+**Demo**: http://terbooter.github.io/LVK-thumbs/
 
 This microservice is part of Live Video Kit (LVK).
 LVK helps stream live video in RTMP format
@@ -43,8 +43,8 @@ nginx:
 ```
 and change exposed port if needed
 * `docker-compose up -d`
-* Check crossdomain URL `/crossdomain.xml` (need for flash player secret policy)
-* Check `/upload` URL (have to show LVK thumbs server info)
+* Check crossdomain URL `/crossdomain.xml` (need for flash player secret policy) [demo](http://lvk.cloudapp.net/crossdomain.xml)
+* Check `/upload` URL (have to show LVK thumbs server info) [demo](http://lvk.cloudapp.net/upload)
 
 # GET params
 publisher.swf sends 3 GET params: 
