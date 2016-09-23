@@ -45,7 +45,7 @@ and change exposed port if needed
 * `docker-compose up -d`
 * Check crossdomain URL `/crossdomain.xml` (need for flash player security policy) [demo](http://lvk.cloudapp.net/crossdomain.xml)
 * Check `/upload` URL (have to show LVK thumbs server info) [demo](http://lvk.cloudapp.net/upload)
-* **Optional** Edit `SERVICE_NAME` variable to set unique service name
+* **Optional** Set `SERVICE_NAME` variable in `.dockerenv` file to set unique service name
 ```
   environment:
     -  SERVICE_NAME=lvk_thumbs_0
