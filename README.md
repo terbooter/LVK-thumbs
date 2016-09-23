@@ -1,5 +1,5 @@
 #Live Video Kit Thumbs
-**Demo**: http://terbooter.github.io/LVK-thumbs/
+[**Demo**](http://terbooter.github.io/LVK-client/demo6.html) 
 
 This microservice is part of Live Video Kit (LVK).
 LVK helps stream live video in RTMP format
