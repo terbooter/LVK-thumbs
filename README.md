@@ -13,8 +13,8 @@ LVK consists of 3 parts:
 This microservice is used for uploading thumbnails from [LVK-client](https://github.com/terbooter/LVK-client) (publisher).
 
 LVK-thumbs consists of two parts:
-1. Uploader (nodejs application)
-2. Nginx
+* Uploader (nodejs application)
+* Nginx
 
 # Usage
 Call publisher API method from JS
